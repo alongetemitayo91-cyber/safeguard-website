@@ -387,24 +387,23 @@
             launch day.
           </p>
           <form
-            class="notify-form"
-            onsubmit="
-              event.preventDefault();
-              this.reset();
-              this.querySelector('button').textContent = 'You\'re on the list';
-            "
-          >
-            <input
-              type="email"
-              required
-              placeholder="you@example.com"
-              aria-label="Email address"
-            />
-            <button type="submit">Notify me</button>
-          </form>
-          <p class="notify-note">
-            We'll only use this email to tell you when SafeGuard NG launches.
-          </p>
+  class="notify-form"
+  id="notifyForm"
+  action="https://formspree.io/f/myeynlao"
+  method="POST"
+>
+  <input
+    type="email"
+    name="email"
+    required
+    placeholder="you@example.com"
+    aria-label="Email address"
+  />
+  <button type="submit">Notify me</button>
+   </form>
+    <p class="notify-note" id="notifyNote">
+        We'll only use this email to tell you when SafeGuard NG launches.
+     </p>
         </div>
         <div class="download-badges">
           <div class="store-badge" aria-disabled="true">

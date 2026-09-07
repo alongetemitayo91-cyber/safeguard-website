@@ -14,3 +14,44 @@ if (navToggle && navLinks) {
     });
   });
 }
+
+// Waitlist form: submits to Formspree, which forwards each signup
+// straight to an inbox.
+const notifyForm = document.getElementById("notifyForm");
+const notifyNote = document.getElementById("notifyNote");
+
+if (notifyForm) {
+  notifyForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const button = notifyForm.querySelector("button");
+    const originalLabel = button.textContent;
+    button.disabled = true;
+    button.textContent = "Sending...";
+
+    try {
+      const response = await fetch(notifyForm.action, {
+        method: "POST",
+        body: new FormData(notifyForm),
+        headers: { Accept: "application/json" },
+      });
+
+      if (response.ok) {
+        notifyForm.reset();
+        button.textContent = "You're on the list";
+        if (notifyNote) {
+          notifyNote.textContent =
+            "Thanks — we'll email you the moment SafeGuard NG launches.";
+        }
+      } else {
+        throw new Error("Request failed");
+      }
+    } catch (err) {
+      button.disabled = false;
+      button.textContent = originalLabel;
+      if (notifyNote) {
+        notifyNote.textContent =
+          "Something went wrong. Please try again in a moment.";
+      }
+    }
+  });
+}
