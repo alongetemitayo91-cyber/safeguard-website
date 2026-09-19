@@ -1,6 +1,3 @@
-import { inject } from "@vercel/analytics";
-
-inject();
 const navToggle = document.getElementById("navToggle");
 const navLinks = document.getElementById("navLinks");
 
